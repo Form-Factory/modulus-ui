@@ -1,8 +1,7 @@
 {
   "name": "modulus-ui",
   "version": "1.0.2",
-  "description": "Plasmic Components for Get Tech",
-  "author": "Form-Factory",
+  "description": "Modulus UI",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
