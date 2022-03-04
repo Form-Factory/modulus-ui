@@ -18,6 +18,7 @@
     "test:lint": "eslint .",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
+    "plasmic:sync": "plasmic sync",
     "predeploy": "cd app && yarn install && yarn run build",
     "deploy": "gh-pages -d app/build"
   },
@@ -25,6 +26,7 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
+    "@plasmicapp/cli": "^0.1.173",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
