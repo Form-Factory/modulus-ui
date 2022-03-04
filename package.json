@@ -1,7 +1,11 @@
 {
   "name": "modulus-ui",
-  "version": "1.0.4-0",
+  "version": "1.0.22-0",
   "description": "Modulus UI",
+  "repository": "Form-Factory/modulus-ui",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",

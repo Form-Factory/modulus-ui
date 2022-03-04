@@ -1,0 +1,40 @@
+name: build-and-publish
+on:
+  repository_dispatch:
+    types: [build-and-publish]
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.release.target_commitish }}
+
+      - name: Setup git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+      - name: Set node version
+        uses: actions/setup-node@v2
+        with:
+          always-auth: true
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Fetch plasmic updates
+        run: |
+          yarn
+          yarn run plasmic:sync
+          git add -A
+          if ! git diff-index --quiet HEAD; then git commit -m 'plasmic sync'; fi
+
+      - name: Publish to npm
+        run: |
+          yarn publish --prepatch
+          git push origin master
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          ENV_AUTH_USER: ${{ secrets.ENV_AUTH_USER }}
+          ENV_AUTH_TOKEN: ${{ secrets.ENV_AUTH_TOKEN }}
